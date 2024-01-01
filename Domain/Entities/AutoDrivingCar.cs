@@ -22,9 +22,9 @@ namespace AutoCar.Domain.Entities
 
         public void Move(string commands)
         {
+            commands = commands.ToUpperInvariant();
             foreach (var command in commands)
             {
-                
                 switch (command)
                 {
                     case 'F':
@@ -36,7 +36,6 @@ namespace AutoCar.Domain.Entities
                     case 'R':
                         RotateRight();
                         break;
-
                 }
                 CheckBoundaries();
             }
@@ -44,7 +43,7 @@ namespace AutoCar.Domain.Entities
         private void MoveForward()
         {
             var (x, y, direction) = Position;
-            Position = direction switch
+            Position = direction.ToUpperInvariant() switch
             {
                 "N" => new Position(x, y + 1, direction),
                 "E" => new Position(x + 1, y, direction),
@@ -57,7 +56,7 @@ namespace AutoCar.Domain.Entities
         private void RotateLeft()
         {
             var (x, y, direction) = Position;
-            Position = direction switch
+            Position = direction.ToUpperInvariant() switch
             {
                 "N" => new Position(x, y, "W"),
                 "E" => new Position(x, y, "N"),
@@ -70,7 +69,7 @@ namespace AutoCar.Domain.Entities
         private void RotateRight()
         {
             var (x, y, direction) = Position;
-            Position = direction switch
+            Position = direction.ToUpperInvariant() switch
             {
                 "N" => new Position(x, y, "E"),
                 "E" => new Position(x, y, "S"),
